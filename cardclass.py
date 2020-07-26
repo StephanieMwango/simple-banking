@@ -1,4 +1,3 @@
-# Write your code here
 import random
 import sqlite3
 
@@ -35,12 +34,15 @@ class CardSystem():
                 exit()
 
             if self.top_menu == '1':
+                while True:
+                    bin_number =  '400000'
+                    account_identifier =  self.gen_ran_number_given_size(9)
+                    card_number = bin_number + account_identifier
+                    self.check_sum(card_number)
+                    self.user_card = card_number + self.checksum
+                    if self.card_exists(self.user_card) is None:
+                        break
 
-                bin_number =  '400000'
-                account_identifier =  self.gen_ran_number_given_size(9)
-                card_number = bin_number + account_identifier
-                self.check_sum(card_number)
-                self.user_card = card_number + self.checksum
                 self.user_pin = self.gen_ran_number_given_size(4)
                 self.card_details_dict[self.user_card] = self.user_pin
                 self.insert_value(self.conn)
@@ -197,7 +199,3 @@ class CardSystem():
 
 cs = CardSystem()
 cs.run_menu()
-
-
-
-
